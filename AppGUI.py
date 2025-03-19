@@ -1,12 +1,11 @@
 import tkinter as tk
 from tkinter import messagebox
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+
 
 from BubbleSort import BubbleSort
 from LinearSearch import LinearSearch
 from Knapsack import Knapsack  # Import the Knapsack class
+from TSPVisualizer import TSPVisualizer  # Import the TSPVisualizerApp class
 
 
 class AppGUI:
@@ -94,7 +93,19 @@ class AppGUI:
             pady=10,
             command=self.teach_knapsack
         )
-        self.knapsack_button.grid(row=0, column=2, padx=10, pady=10)  # Changed column to 2
+        self.knapsack_button.grid(row=0, column=2, padx=10, pady=10)
+
+        self.tsp_button = tk.Button(
+            button_frame,
+            text="TSP Solver",
+            font=self.button_font,
+            bg="#FFC107",
+            fg="white",
+            padx=20,
+            pady=10,
+            command=self.teach_tsp
+        )
+        self.tsp_button.grid(row=0, column=3, padx=10, pady=10)
 
     def create_exit_button(self):
         exit_button = tk.Button(
@@ -233,12 +244,14 @@ class AppGUI:
         )
         visualize_button.grid(row=3, column=0, columnspan=2, pady=10)
 
-
-
-
     def teach_knapsack(self):
         """Calls the Knapsack class when the button is clicked."""
         Knapsack()
+
+    def teach_tsp(self):
+        """Calls the TSPVisualizerApp class when the button is clicked."""
+        tsp_window = tk.Toplevel(self.root)
+        tsp_app = TSPVisualizer(tsp_window)
 
 
 # Main Program
