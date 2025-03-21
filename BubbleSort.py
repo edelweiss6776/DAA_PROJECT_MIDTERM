@@ -64,7 +64,7 @@ class BubbleSort:
 
         # Control variables
         paused = False
-        speed = 100  # Default speed in milliseconds
+        speed = 1000  # Default speed in milliseconds
         step = 0
         i = 0
         j = 0
@@ -179,3 +179,38 @@ class BubbleSort:
         )
 
 
+# Main application
+class SortingVisualizerApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Sorting Visualizer")
+        self.root.geometry("400x200")
+
+        # Input frame
+        input_frame = tk.Frame(self.root)
+        input_frame.pack(pady=20)
+
+        # Label and Entry for array input
+        tk.Label(input_frame, text="Enter array (comma-separated):").pack(side=tk.LEFT)
+        self.array_entry = tk.Entry(input_frame, width=30)
+        self.array_entry.pack(side=tk.LEFT, padx=10)
+
+        # Button to start visualization
+        tk.Button(self.root, text="Start Bubble Sort", command=self.start_bubble_sort).pack(pady=10)
+
+    def start_bubble_sort(self):
+        try:
+            # Get the array from the entry widget
+            arr = list(map(int, self.array_entry.get().split(',')))
+            # Instantiate BubbleSort and start visualization
+            bubble_sort = BubbleSort()
+            bubble_sort.bubble_sort_visual(self.root, arr)
+        except ValueError:
+            tk.messagebox.showerror("Input Error", "Please enter a valid comma-separated list of integers.")
+
+
+# Run the application
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = SortingVisualizerApp(root)
+    root.mainloop()
